@@ -34,7 +34,7 @@ class SendBirthdayImage
             }
             
             Mail::to($user->email)->send(new BirthdayImageMail($imagePath, $user));
-            \Log::info("[SERVICE] Imagem gerada em: " . storage_path('app/' . $imagePath));
+            \Log::info("[SERVICE] Imagem gerada em: " . public_path($imagePath));
         }
     }
 
@@ -119,7 +119,7 @@ class SendBirthdayImage
         $posX = $col == 0 ? $centerX - $imageSize - $margin / 2 : $centerX + $margin / 2;
         $posY = $startYimg + ($row * ($imageSize + $margin));
 
-        $userImagePath = storage_path('app/public/' . $imagePath);
+        $userImagePath = public_path($imagePath);
         if (!file_exists($userImagePath)) continue;
 
         $imageInfo = getimagesize($userImagePath);
@@ -151,13 +151,14 @@ class SendBirthdayImage
         imagedestroy($userImage);
     }
 
-    $nomeArquivo = 'comemorativo_' . $user->nameCasal . '_' . time() . '.jpg';
-    $caminhoFinal = 'public/comemorativos/' . $nomeArquivo;
-    imagejpeg($imageAniversario, storage_path('app/' . $caminhoFinal), 90);
+    $nomeArquivo = 'comemorativo_'. $user->nameCasal .'_'.time().'.jpg';
+    $caminhoFinal = 'comemorativos/'.$nomeArquivo;
+    imagejpeg($imageAniversario, public_path($caminhoFinal), 90);
 
     imagedestroy($imageAniversario);
     imagedestroy($background);
 
+    \Log::info('[SERVICE] caminhoFinal:' .$caminhoFinal);
     return $caminhoFinal;
 }
 }
