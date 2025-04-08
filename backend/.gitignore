@@ -23,5 +23,3 @@ yarn-error.log
 /.zed
 public/uploads
 public/comemorativos
-composer.json
-composer.lock
