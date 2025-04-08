@@ -36,7 +36,7 @@ class BirthdayImageMail extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromPath(storage_path('app/' . $this->imagePath))
+            Attachment::fromPath(public_path($this->imagePath)) //já vem public/comemorativos/nome_do_arquivo
                 ->as("{$this->user->nameCasal}_aniversario.png")
                 ->withMime('image/png')
         ];

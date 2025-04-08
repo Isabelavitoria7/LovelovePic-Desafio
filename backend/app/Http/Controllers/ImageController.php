@@ -19,16 +19,18 @@ class ImageController extends Controller
 
         $uploadedImages = [];
 
-        forEach($request->file('images') as $image){
-            $imagePath = $image->store('uploads', 'public'); //salva na pasta uploads dentro de storage/app/public
-            
-            //slava id e caminho da imagem no bd e associa com o usuario
+        foreach ($request->file('images') as $image) {
+            $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads'), $filename);
+        
+            // Salva o caminho no banco de dados (relativo ao public/)
             $newimage = new Image();
             $newimage->user_id = $request->user_id;
-            $newimage->path = $imagePath;
+            $newimage->path = 'uploads/' . $filename;
             $newimage->save();
-
-            $uploadedImages[] = Storage::url($imagePath); //metodo asset para pegar a url completa da imagem salva em storage/app/public/uploads 
+        
+            // Adiciona a URL acessível
+            $uploadedImages[] = asset('uploads/' . $filename);
         }
 
 
