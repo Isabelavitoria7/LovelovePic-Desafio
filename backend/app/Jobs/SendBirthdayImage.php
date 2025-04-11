@@ -84,9 +84,9 @@ class SendBirthdayImage
     }
     $lines[] = trim($line);
 
-    $lineHeight = abs($box[7] - $box[1]);
+    $lineHeight = abs($box[7] - $box[1])*1.3; //espacamento entre as linhas
     $totalHeight = count($lines) * $lineHeight;
-    $startY = ($height / 4) - ($totalHeight / 2);
+    $startY = ($height / 5) - ($totalHeight / 2);
 
     foreach ($lines as $i => $lineText) {
         $box = imagettfbbox($fontSize, $angle, $fontPath, $lineText);
