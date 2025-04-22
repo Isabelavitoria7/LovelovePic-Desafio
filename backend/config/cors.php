@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
+    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000', 'https://lovelovepic-git-main-isabelavitoria7s-projects.vercel.app', 'https://lovelovepic-isabelavitoria7s-projects.vercel.app')],
 
     'allowed_origins_patterns' => [],
 
