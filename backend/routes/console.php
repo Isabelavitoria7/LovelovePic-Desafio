@@ -11,4 +11,4 @@ Artisan::command('send:birthday-images', function () {
     $this->info('Job SendBirthdayImage despachado!');
 });
 
-Schedule::command('send:birthday-images')->dailyat('08:00')->timezone('America/Sao_Paulo');
+Schedule::command('send:birthday-images')->dailyat('09:25')->timezone('America/Sao_Paulo');
