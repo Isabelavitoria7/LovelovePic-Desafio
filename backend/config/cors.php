@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://lovelovepic-git-main-isabelavitoria7s-projects.vercel.app/', 'https://lovelovepic-isabelavitoria7s-projects.vercel.app/' ],
+    'Access-Control-Allow-Origin:' => ['https://lovelovepic-git-main-isabelavitoria7s-projects.vercel.app/', 'https://lovelovepic-isabelavitoria7s-projects.vercel.app/' ],
 
     'allowed_origins_patterns' => [],
 
