@@ -48,7 +48,8 @@ composer install
 
 
 ## Para o frontend 
-1. Primeiro conecte ele com o backend 
+1. Primeiro conecte ele com o backend, no diretório frontend:
+
 - Instale localtunnel para expor sua porta
 ```
 npm install -g localtunnel 
@@ -61,12 +62,19 @@ lt --port 80
 - Antes de usar o link de fato, consulte ele no navegador e siga a instrução de configuração da senha.
 
 - Suba as alterações do seu repositório alterado pro github <br/>
-- Na [https://vercel.com/](Vercel) adicione um novo projeto e selecione o root como /frontend para fazer o deploy. <br/>
+- Na [https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://vercel.com/&ved=2ahUKEwj1l8qJ8_CMAxVJrpUCHfhiAZcQFnoECAwQAQ&usg=AOvVaw0IyxhwoD9uGvLBGqylHAlt](Vercel) adicione um novo projeto e selecione o root como /frontend para fazer o deploy. <br/>
 - Ainda na vercel configure a variável de ambiente NEXT_PUBLIC_API_URL=[linkdotunel]
 
 ## Aplicativo
-- Instale as dependências npm install <br>
-- Rode o comando npx expo start <br>
+- No diretório Love-app:
+- Instale as dependências
+```
+npm install
+```
+- Rode o comando para iniciar o app
+```
+npx expo start
+```
 - Altere na pasta constantes o httpRequest para o endereço gerado <br>
 - Baixe no seu dispositivo o app Expo go <br>
 - Leia o QR code gerado no terminal <br>
