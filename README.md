@@ -33,15 +33,18 @@ composer install
 
 - Configure o MAIL para envio de emails. Se tem dúvidas sobre o MAIL_PASSWORD= você deve gerar essa senha com sua conta Google, lembrando que sua conta precisa ter verificação em duas etapas. Sabendo disso, [gere aqui sua senha diretamente](https://myaccount.google.com/apppasswords) ou [siga um passo a passo completo](https://snov.io/knowledgebase/br/como-criar-e-usar-a-senha-do-aplicativo-gmail/).
 
-5. Rode as migrations para criar a estrutura do banco: 
+### Se conecte ao banco de dados
+
+5. Garanta que a porta 3307 está disponível para não dar conflto de porta, ou altere para outra. Use um SGDB e crie um banco de dados com o nome Sail.
+
+6. Rode as migrations para criar a estrutura do banco: 
 ```
 ./vendor/bin/sail artisan migrate
 ```
 
+7. Crie a pasta uploads e comemorativos em backend/public
 
-6. Crie a pasta uploads e comemorativos em backend/public
-
-7. O agendamento de horário para envio dos emails está em backend/routes/console.php altere o horário para um horário próximo para testar.
+8. O agendamento de horário para envio dos emails está em backend/routes/console.php altere o horário para um horário próximo para testar.
 
 
 ## Para o frontend 
