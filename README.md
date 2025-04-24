@@ -4,8 +4,12 @@
  Criar um aplicativo mobile e desktop para que o usuário adicione fotos e informações sobre seu relacionamento, para que no dia do aniversário do casal, uma montagem com as fotos e mensagem enviadas seja gerada automaticamente e enviada no e-mail deste usuário.
 
 ## Como rodar o projeto em sua máquina:
-Dê um git clone no projeto <br/>
-OBS: Você deve ter instalado o [Docker Desktop](https://www.docker.com/products/docker-desktop/) em sua máquina.
+Crie uma pasta e abra com vsCode, no terminal clone o projeto:
+```
+git clone https://github.com/Isabelavitoria7/LovelovePic-Desafio.git .
+```
+
+OBS: Você deve ter instalado o [Docker Desktop](https://www.docker.com/products/docker-desktop/) em sua máquina para as próximas etapas.
 
 ## Comece configurando o backend
 1. Entre no diretório /backend se você não tem o composer instalado siga as instruções, para instalar: [https://kinsta.com/pt/blog/instalar-composer/].
@@ -21,18 +25,18 @@ composer install
 ./vendor/bin/sail up 
 ```
 
-4. Rode as migrations para criar a estrutura do banco: 
-```
-./vendor/bin/sail artisan migrate
-```
-
-5. Crie e configure o arquivo .env baseado .env.example <br/>
+4. Crie e configure o arquivo .env baseado .env.example <br/>
 - Gere uma key para APP_KEY:  
 ```
 ./vendor/bin/sail artisan key:generate
 ```
 
 - Configure o MAIL para envio de emails. Se tem dúvidas sobre o MAIL_PASSWORD= você deve gerar essa senha com sua conta Google, lembrando que sua conta precisa ter verificação em duas etapas. Sabendo disso, [gere aqui sua senha diretamente](https://myaccount.google.com/apppasswords) ou [siga um passo a passo completo](https://snov.io/knowledgebase/br/como-criar-e-usar-a-senha-do-aplicativo-gmail/).
+
+5. Rode as migrations para criar a estrutura do banco: 
+```
+./vendor/bin/sail artisan migrate
+```
 
 
 6. Crie a pasta uploads e comemorativos em backend/public
