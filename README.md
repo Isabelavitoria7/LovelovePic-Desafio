@@ -1,63 +1,70 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Projeto Lovelovepic ❤️📷
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Objetivo do projeto
+ Criar um aplicativo mobile e desktop para que o usuário adicione fotos e informações sobre seu relacionamento, para que no dia do aniversário do casal, uma montagem com as fotos e mensagem enviadas seja gerada automaticamente e enviada no e-mail deste usuário.
 
-## About Laravel
+## Como rodar o projeto em sua máquina:
+Dê um git clone no projeto <br/>
+OBS: Você deve ter instalado o [Docker Desktop](https://www.docker.com/products/docker-desktop/) em sua máquina.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Comece configurando o backend
+1. Entre no diretório /backend se você não tem o composer instalado siga as instruções, para instalar: [https://kinsta.com/pt/blog/instalar-composer/].
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. Instale as dependências: 
+```
+composer install
+```
+    
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. No terminal suba os containers: servidor, mySQL e do agendamento de mensagens: 
+```
+./vendor/bin/sail up 
+```
 
-## Running this project
+4. Rode as migrations para criar a estrutura do banco: 
+```
+./vendor/bin/sail artisan migrate
+```
 
--Install dependecies (npm install)
--Install docker 
--Run ./vendor/bin/sail up
--Run migrations ./vendor/bin/sail artisan migration
--config .env with correct informations db, mail
+5. Crie e configure o arquivo .env baseado .env.example <br/>
+- Gere uma key para APP_KEY:  
+```
+./vendor/bin/sail artisan key:generate
+```
+
+- Configure o MAIL para envio de emails. Se tem dúvidas sobre o MAIL_PASSWORD= você deve gerar essa senha com sua conta Google, lembrando que sua conta precisa ter verificação em duas etapas. Sabendo disso, [gere aqui sua senha diretamente](https://myaccount.google.com/apppasswords) ou [siga um passo a passo completo](https://snov.io/knowledgebase/br/como-criar-e-usar-a-senha-do-aplicativo-gmail/).
 
 
-### Premium Partners
+6. Crie a pasta uploads e comemorativos em backend/public
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+7. O agendamento de horário para envio dos emails está em backend/routes/console.php altere o horário para um horário próximo para testar.
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Para o frontend 
+1. Primeiro conecte ele com o backend 
+- Instale localtunnel para expor sua porta
+```
+npm install -g localtunnel 
+```
+- Gere um "tunel" para seu servidor local 
+```
+lt --port 80 
+```
+- Crie um arquivo .env com a seguinte chave-valor: NEXT_PUBLIC_API_URL=[linkdotunel] <br/>
+- Antes de usar o link de fato, consulte ele no navegador e siga a instrução de configuração da senha.
 
-## Code of Conduct
+- Suba as alterações do seu repositório alterado pro github <br/>
+- Na [https://vercel.com/](Vercel) adicione um novo projeto e selecione o root como /frontend para fazer o deploy. <br/>
+- Ainda na vercel configure a variável de ambiente NEXT_PUBLIC_API_URL=[linkdotunel]
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Aplicativo
+- Instale as dependências npm install <br>
+- Rode o comando npx expo start <br>
+- Altere na pasta constantes o httpRequest para o endereço gerado <br>
+- Baixe no seu dispositivo o app Expo go <br>
+- Leia o QR code gerado no terminal <br>
 
-## Security Vulnerabilities
+<br><br>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Pronto!!
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
