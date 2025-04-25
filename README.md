@@ -83,3 +83,16 @@ npx expo start
 
 # Pronto!!
 
+
+
+entre no container do mysql com nome user e host % para garantir a conexão com o banco siga os passos:
+com o contaienr rodando attach sail -> mysql -> 
+
+CREATE USER 'novo_usuário'@'localhost' IDENTIFIED BY 'senha';
+
+GRANT ALL PRIVILEGES ON * . * TO 'novo_usuario'@'localhost'; 
+
+FLUSH PRIVILEGES;
+
+
+adicione a senha senha no .env em dbpassword.
