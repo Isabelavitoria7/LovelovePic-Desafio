@@ -71,109 +71,96 @@ export default function ModalInformation({
             }, [])
 
 
-        const handleSubmit = async (e: React.FormEvent) => {
-            setIsLoading(true);
-            e.preventDefault();
-            if(isLoading){
-                return; //evita duplos cliques na hora do submit
-            }
-            setIsLoading(true);
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 2000); // Simula um carregamento de 2 segundos
-
-            //para lidar com imagens
-            const fileInput = document.querySelector<HTMLInputElement>('input[name = "arquivo"]');
-
-            if(!fileInput || !fileInput.files || fileInput.files.length === 0){
-                alert ("Selecione apenas uma imagem");
-                return;
-            }
-
-            //crio um formData
-
-            const formDataImg = new FormData();
-            formDataImg.append("user_id", userId); 
-
-            //Array.from transforma objeto em array
-            Array.from(fileInput.files).forEach((file) => {
-                formDataImg.append(`images[]`, file);
-            })
-
-
-
-
-            function convertToISODate(dateStr: string): string {
-                const [day, month, year] = dateStr.split('/');
-                if (!day || !month || !year) return ""; // tratamento de erro básico
-                return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-            }  // converte para 'YYYY-MM-DD' que é o aceito no mysql
-           
-            const requestData = {
-                user_id: userId,
-                nameCasal: formData.nameCasal,
-                tempo: convertToISODate(formData.tempo),
-                text: formData.text
-            }
-
-            try {
-                const response1 = await fetch(`${httpLinkRequest}/api/dataRelationship`, {
+            const handleSubmit = async (e: React.FormEvent) => {
+                e.preventDefault();
+                if (isLoading) return; // Evita duplos cliques
+              
+                setIsLoading(true);
+              
+                try {
+                  // Prepara o formDataImg
+                  const fileInput = document.querySelector<HTMLInputElement>('input[name="arquivo"]');
+                  if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                    alert("Selecione uma imagem");
+                    return;
+                  }
+              
+                  const formDataImg = new FormData();
+                  formDataImg.append("user_id", userId);
+                  Array.from(fileInput.files).forEach((file) => {
+                    formDataImg.append(`images[]`, file);
+                  });
+              
+                  // Função para converter a data
+                  function convertToISODate(dateStr: string): string {
+                    const [day, month, year] = dateStr.split('/');
+                    if (!day || !month || !year) return "";
+                    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+                  }
+              
+                  const requestData = {
+                    user_id: userId,
+                    nameCasal: formData.nameCasal,
+                    tempo: convertToISODate(formData.tempo),
+                    text: formData.text
+                  };
+              
+                  // Primeiro request: PUT das informações do casal
+                  const response1 = await fetch(`${httpLinkRequest}/api/dataRelationship`, {
                     method: "PUT",
                     headers: {
-                        "Content-Type": "application/json"
+                      "Content-Type": "application/json",
+                      "Accept": "application/json"
                     },
                     body: JSON.stringify(requestData)
-                });
-            
-                // Verificar se a resposta foi bem-sucedida
-                if (response1.ok) {
-                    alert("Informações cadastradas com sucesso!");
-
-
-                // Recupera os dados existentes no localStorage (se houver)  
-                const storedUser = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : {}; 
-
-                // Atualiza apenas o nameCasal sem apagar outras informações  
-                storedUser.nameCasal = requestData.nameCasal;  
-
-                // Salva os dados de volta no localStorage  
-                localStorage.setItem("user", JSON.stringify(storedUser));
-                } else {
-                    const errorData = await response1.json();
-                    alert(`Erro: ${errorData.message || 'Erro ao conectar com o servidor'}`);
-                }
-
-
-                const response2 = await fetch(`${httpLinkRequest}/api/upload-image`, {
+                  });
+              
+                  // Segundo request: POST das imagens
+                  const response2 = await fetch(`${httpLinkRequest}/api/upload-image`, {
                     method: "POST",
+                    headers: {
+                      "Accept": "application/json"
+                    },
                     body: formDataImg
-                })
-
-                if(!response2.ok){
-                    alert("Erro ao enviar as imagens");
-                    return;
+                  });
+              
+                  // Se os dois forem OK
+                  if (response1.ok && response2.ok) {
+                    // Atualiza o localStorage
+                    const storedUser = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : {};
+                    storedUser.nameCasal = requestData.nameCasal;
+                    localStorage.setItem("user", JSON.stringify(storedUser));
+              
+                    // Fecha o modal (caso exista) e redireciona
+                    onClose && onClose();
+              
+                    setTimeout(() => {
+                      window.location.href = '/home'; // Volta pra Home
+                    }, 500);
+              
+                  } else {
+                    // Trata erro
+                    const responseData = await response2.json();
+                    if (!responseData.ok) {
+                      alert(responseData.message);
+                    } else {
+                      alert("Erro ao salvar as informações do casal!");
+                    }
+              
+                    onClose && onClose();
+                    setTimeout(() => {
+                      window.location.href = '/home';
+                    }, 500);
+                  }
+              
+                } catch (error) {
+                  console.error(error);
+                  alert("Erro ao conectar com o servidor");
+                } finally {
+                  setIsLoading(false);
                 }
-
-                alert("Imagens enviadas com sucesso!");
-
-
-                // Fecha o modal
-                onClose();
-                
-
-                // Atualiza a página
-                setTimeout(() => {
-                    window.location.reload();
-                }, 500); // Pequeno delay para garantir que o modal fechou antes do reload
-                
-            }catch(error){
-                console.error("Erro:", error);
-                alert("Erro ao conectar com o servidor");
-            }finally{
-                setIsLoading(false);
-            }           
-        
-        }
+              };
+              
 
         const handleSubmitOnlyImg = async (e: React.FormEvent) => {
             setIsLoading(true);
