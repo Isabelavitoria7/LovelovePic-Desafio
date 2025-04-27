@@ -52,7 +52,7 @@ Se der problema com a pasta /var/www/html de permissão para ela com chmod 755 -
 
 ### Se conecte ao banco de dados
 
-5. Garanta que a porta 3307 está disponível para não dar conflto de porta, ou altere para outra. Use um SGDB e crie um banco de dados com o nome Sail.
+5. Garanta que a porta 3307 está disponível para não dar conflito de porta, ou altere para outra.
 
 6. Rode as migrations para criar a estrutura do banco: 
 ```
@@ -78,8 +78,8 @@ lt --port 80
 - Crie um arquivo .env e adicione seguinte chave-valor: NEXT_PUBLIC_API_URL=[linkdotunel] sem ""<br/>
 - Antes de usar o link de fato, consulte ele no navegador e siga a instrução de configuração da senha.
 
-- Suba as alterações do seu repositório alterado pro github se houver<br/>
-- Na [https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://vercel.com/&ved=2ahUKEwj1l8qJ8_CMAxVJrpUCHfhiAZcQFnoECAwQAQ&usg=AOvVaw0IyxhwoD9uGvLBGqylHAlt](https://vercel.com/) adicione um novo projeto e selecione o root como /frontend para fazer o deploy. <br/>
+- Suba seu projeto para um repositório remoto no github<br/>
+- Na [Vercel](https://vercel.com/) adicione um novo projeto e selecione o root como /frontend para fazer o deploy. <br/>
 - Ainda na vercel configure a variável de ambiente NEXT_PUBLIC_API_URL=[linkdotunel]
 
 ## Aplicativo
