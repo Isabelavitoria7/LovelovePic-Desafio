@@ -78,8 +78,8 @@ lt --port 80
 - Crie um arquivo .env e adicione seguinte chave-valor: NEXT_PUBLIC_API_URL=[linkdotunel] sem ""<br/>
 - Antes de usar o link de fato, consulte ele no navegador e siga a instrução de configuração da senha.
 
-- Suba as alterações do seu repositório alterado pro github <br/>
-- Na [https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://vercel.com/&ved=2ahUKEwj1l8qJ8_CMAxVJrpUCHfhiAZcQFnoECAwQAQ&usg=AOvVaw0IyxhwoD9uGvLBGqylHAlt](Vercel) adicione um novo projeto e selecione o root como /frontend para fazer o deploy. <br/>
+- Suba as alterações do seu repositório alterado pro github se houver<br/>
+- Na [https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://vercel.com/&ved=2ahUKEwj1l8qJ8_CMAxVJrpUCHfhiAZcQFnoECAwQAQ&usg=AOvVaw0IyxhwoD9uGvLBGqylHAlt](https://vercel.com/) adicione um novo projeto e selecione o root como /frontend para fazer o deploy. <br/>
 - Ainda na vercel configure a variável de ambiente NEXT_PUBLIC_API_URL=[linkdotunel]
 
 ## Aplicativo
