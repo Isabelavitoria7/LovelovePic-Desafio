@@ -9,7 +9,7 @@ Crie uma pasta e abra com vsCode, no terminal clone o projeto:
 git clone https://github.com/Isabelavitoria7/LovelovePic-Desafio.git .
 ```
 
-OBS: Você deve ter instalado o [Docker Desktop](https://www.docker.com/products/docker-desktop/) em sua máquina para as próximas etapas.
+OBS: Você deve ter instalado o [Docker](https://www.docker.com/products/docker-desktop/) em sua máquina para as próximas etapas.
 
 ## Comece configurando o backend
 1. Entre no diretório /backend se você não tem o composer instalado siga as instruções, para instalar: [https://kinsta.com/pt/blog/instalar-composer/].
