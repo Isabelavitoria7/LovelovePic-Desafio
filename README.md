@@ -25,13 +25,30 @@ composer install
 ./vendor/bin/sail up 
 ```
 
-4. Crie e configure o arquivo .env baseado .env.example <br/>
-- Gere uma key para APP_KEY:  
+4. Crie um arquivo .env na raiz do projeto e configure-o baseado no .env.example, atente-se em nas instruções abaixo para algumas mudanças nesse .env<br/>
+
+Para garantir a conexão com o banco siga os passos: <br>
+com o container mysql rodando, attach shell -> Entre no mysql (apenas digite mysql) <br>
+crie um novo usuário com name user e host % com o comando abaixo, escolha a sua senha.
+
+```
+CREATE USER 'user'@'%' IDENTIFIED BY 'senha';
+
+GRANT ALL PRIVILEGES ON * . * TO 'user'@'%'; 
+
+FLUSH PRIVILEGES;
+```
+
+adicione a senha senha no .env na variável DBPASSWORD.
+
+- Configure o MAIL para envio de emails. Se tem dúvidas sobre o MAIL_PASSWORD= você deve gerar essa senha com sua conta Google, lembrando que sua conta precisa ter verificação em duas etapas. Sabendo disso, [gere aqui sua senha diretamente](https://myaccount.google.com/apppasswords) ou [siga um passo a passo completo](https://snov.io/knowledgebase/br/como-criar-e-usar-a-senha-do-aplicativo-gmail/).
+
+- Gere uma key para variável APP_KEY:  
 ```
 ./vendor/bin/sail artisan key:generate
 ```
 
-- Configure o MAIL para envio de emails. Se tem dúvidas sobre o MAIL_PASSWORD= você deve gerar essa senha com sua conta Google, lembrando que sua conta precisa ter verificação em duas etapas. Sabendo disso, [gere aqui sua senha diretamente](https://myaccount.google.com/apppasswords) ou [siga um passo a passo completo](https://snov.io/knowledgebase/br/como-criar-e-usar-a-senha-do-aplicativo-gmail/).
+Se der problema com a pasta /var/www/html de permissão para ela com chmod 755 -R /var/www/html e depois transfira os arquivos backend para lá docker cp /mnt/c/Users/Usuario/Documents/TesteLovePic/backend/. <idDocontainerDoBackend>lt --port 80:/var/www/html/
 
 ### Se conecte ao banco de dados
 
@@ -58,7 +75,7 @@ npm install -g localtunnel
 ```
 lt --port 80 
 ```
-- Crie um arquivo .env com a seguinte chave-valor: NEXT_PUBLIC_API_URL=[linkdotunel] <br/>
+- Crie um arquivo .env e adicione seguinte chave-valor: NEXT_PUBLIC_API_URL=[linkdotunel] sem ""<br/>
 - Antes de usar o link de fato, consulte ele no navegador e siga a instrução de configuração da senha.
 
 - Suba as alterações do seu repositório alterado pro github <br/>
@@ -85,14 +102,3 @@ npx expo start
 
 
 
-entre no container do mysql com nome user e host % para garantir a conexão com o banco siga os passos:
-com o contaienr rodando attach sail -> mysql -> 
-
-CREATE USER 'novo_usuário'@'localhost' IDENTIFIED BY 'senha';
-
-GRANT ALL PRIVILEGES ON * . * TO 'novo_usuario'@'localhost'; 
-
-FLUSH PRIVILEGES;
-
-
-adicione a senha senha no .env em dbpassword.
